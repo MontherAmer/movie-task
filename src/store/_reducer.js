@@ -1,11 +1,13 @@
-const initialState = { moviesList: [], displayedMovie: {} };
+const initialState = { moviesList: [], displayedMovie: {}, similars: [] };
 
 const state = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'LIST_OF_MOVIES':
-      return { ...state, moviesList: payload };
+      return { ...state, movies: payload.results, total_pages: payload.total_pages };
     case 'MOVIE_DETAILS':
-      return { ...state, displayedMovie: payload };
+      return { ...state, movie: payload };
+    case 'LIST_MOVIE_SIMILERS':
+      return { ...state, similars: payload.slice(0, 10) };
     default:
       return state;
   }
