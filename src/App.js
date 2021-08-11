@@ -6,13 +6,17 @@ import Movie from './pages/Movie';
 
 const App = () => {
   return (
-    <div className="container-fluid">
-      <Router>
-        <Switch>
-          <Route path="/movie/:id" render={() => <Movie />} exact={true} />
-          <Route path="/" render={() => <Home />} exact={false} />
-        </Switch>
-      </Router>
+    <div className="container-fluid pt-4">
+      <div className="row">
+        <div className="col">
+          <Router>
+            <Switch>
+              <Route path="/movie/:id" render={() => <Movie />} exact={true} />
+              <Route path="/" render={() => <Home />} exact={false} />
+            </Switch>
+          </Router>
+        </div>
+      </div>
     </div>
   );
 };
