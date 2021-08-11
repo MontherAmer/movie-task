@@ -70,3 +70,21 @@
 .card-rate.yellow {
   border-color: #b38b26;
 }
+
+.pagination-item {
+  width: 25px;
+  height: 25px;
+  background: transparent;
+  margin-left: 2px;
+  margin-right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pagination-item.active {
+  border: 2px solid #9f700b;
+  color: #9f700b;
+  border-radius: 50%;
+}

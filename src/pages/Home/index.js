@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -6,19 +6,35 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { listMovies, searchMovies, getMovieDetails, getMovieSimilars } from '../../store/_actions';
 
 import Card from '../../components/Card';
+import Pagination from '../../components/Pagination';
 
 import './index.css';
 const Home = () => {
   const dispatch = useDispatch();
+  const [state, setState] = useState({ page: 1, tab: 'upcoming', query: '' });
 
-  const list = useSelector((state) => state.movies);
+  const { movies, total_pages } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(listMovies('upcoming', 2));
-    // dispatch(searchMovies('arm', 1));
-    dispatch(getMovieDetails(106402));
-    dispatch(getMovieSimilars(106402));
+    dispatch(listMovies({ type: 'upcoming', page: 1 }));
   }, []);
+
+  const handleCategory = (e) => {
+    setState({ ...state, tab: e, page: 1, query: '' });
+    dispatch(listMovies({ type: e, page: 1 }));
+  };
+
+  const handleSearch = (e) => {
+    setState({ ...state, query: e.target.value });
+    dispatch(searchMovies({ query: e.target.value, page: state.page }));
+  };
+
+  const handlePagination = (e) => {
+    console.log('ppppp ', e);
+    console.log('sakfdlsadf');
+    setState({ ...state, page: e });
+    state.query.length ? dispatch(searchMovies({ query: e.target.value, page: e })) : dispatch(listMovies({ type: state.tab, page: e }));
+  };
 
   return (
     <div className="container">
@@ -30,28 +46,36 @@ const Home = () => {
         <div className="col d-flex justify-content-end">
           <div className="input">
             <AiOutlineSearch className="icon" size={30} />
-            <input placeholder="Search..." />
+            <input placeholder="Search..." value={state.query} onChange={handleSearch} />
           </div>
         </div>
       </div>
       {/* Tabs Section */}
       <div className="row mt-3">
         <div className="col d-flex justify-content-start">
-          <h5 className="m-0 me-4 pointer golden underlined">UPCOMING</h5>
-          <h5 className="m-0 me-4 pointer">POPULAR</h5>
-          <h5 className="m-0 me-4 pointer">TOP RATED</h5>
+          <h5 className={`m-0 me-4 pointer ${state.tab === 'upcoming' ? 'golden underlined' : ''}`} onClick={() => handleCategory('upcoming')}>
+            UPCOMING
+          </h5>
+          <h5 className={`m-0 me-4 pointer ${state.tab === 'popular' ? 'golden underlined' : ''}`} onClick={() => handleCategory('popular')}>
+            POPULAR
+          </h5>
+          <h5 className={`m-0 me-4 pointer ${state.tab === 'top_rated' ? 'golden underlined' : ''}`} onClick={() => handleCategory('top_rated')}>
+            TOP RATED
+          </h5>
         </div>
       </div>
 
       <div className="row mt-5">
-        {list
-          ? list.map((item, i) => (
+        {movies
+          ? movies.map((item, i) => (
               <div key={i} className="col-3">
                 <Card data={item} />
               </div>
             ))
           : null}
       </div>
+
+      <Pagination page={state.page} totalPages={total_pages} onChange={handlePagination} />
     </div>
   );
 };
