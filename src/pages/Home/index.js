@@ -33,7 +33,7 @@ const Home = () => {
     console.log('ppppp ', e);
     console.log('sakfdlsadf');
     setState({ ...state, page: e });
-    state.query.length ? dispatch(searchMovies({ query: e.target.value, page: e })) : dispatch(listMovies({ type: state.tab, page: e }));
+    state.query.length ? dispatch(searchMovies({ query: state.query, page: e })) : dispatch(listMovies({ type: state.tab, page: e }));
   };
 
   return (

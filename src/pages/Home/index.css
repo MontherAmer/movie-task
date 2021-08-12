@@ -63,12 +63,15 @@
 
 .card-rate.red {
   border-color: #ce6561;
+  background-color: #ce6561;
 }
 .card-rate.green {
   border-color: #329767;
+  background-color: #329767;
 }
 .card-rate.yellow {
   border-color: #b38b26;
+  background-color: #b38b26;
 }
 
 .pagination-item {
@@ -87,4 +90,14 @@
   border: 2px solid #9f700b;
   color: #9f700b;
   border-radius: 50%;
+}
+
+.home-icon {
+  position: fixed;
+  top: 17px;
+  left: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  font-size: 40px;
+  cursor: pointer;
 }

@@ -8,7 +8,7 @@ const state = (state = initialState, { type, payload }) => {
     case 'MOVIE_DETAILS':
       return { ...state, movie: payload };
     case 'LIST_MOVIE_SIMILERS':
-      return { ...state, similars: payload.slice(0, 10) };
+      return { ...state, similars: payload.slice(0, 4) };
     default:
       return state;
   }
