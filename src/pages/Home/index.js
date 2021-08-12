@@ -68,7 +68,7 @@ const Home = () => {
       <div className="row mt-5">
         {movies
           ? movies.map((item, i) => (
-              <div key={i} className="col-3">
+              <div key={i} className="col-xs-12 col-md-6 col-lg-3">
                 <Card data={item} />
               </div>
             ))

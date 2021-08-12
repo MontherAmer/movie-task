@@ -29,9 +29,9 @@ const Movie = () => {
 
   return movie ? (
     <div className="container  position-relative">
-      <AiOutlineArrowLeft className="home-icon" title="home" onClick={goBack} />
       <div className="row">
-        <div className="col">
+        <div className="col d-flex align-items-center">
+          <AiOutlineArrowLeft className="home-icon" title="home" onClick={goBack} />
           <h2 className="m-0">{movie.original_title}</h2>
         </div>
       </div>
@@ -59,7 +59,7 @@ const Movie = () => {
           <div className="row">
             {similars
               ? similars.map((item, i) => (
-                  <div key={i} className="col-6">
+                  <div key={i} className="col-xs-12 col-lg-6">
                     <Card data={item} />
                   </div>
                 ))
